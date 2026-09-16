@@ -9,31 +9,31 @@ const toggleAccordion = (sec: string) => {
 <template>
   <div class="max-w-5xl mx-auto px-4 py-12 text-left space-y-8">
     <div class="border-b border-slate-200 pb-4">
-      <span class="text-xs font-bold text-teal-600 uppercase tracking-wider">Sección 5</span>
+
       <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Otros Servicios Clínicos</h1>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div id="domiciliar" class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-2">
         <div class="text-2xl">🏠</div>
-        <h3 class="font-bold text-slate-900 text-base">5.1 Fisioterapia domiciliar</h3>
+        <h3 class="font-bold text-slate-900 text-base">Fisioterapia domiciliar</h3>
         <p class="text-xs text-slate-600">Atención personalizada en casa para pacientes con movilidad limitada o postquirúrgicos inmediatos.</p>
       </div>
 
       <div id="terapeuticos" class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-2">
         <div class="text-2xl">👐</div>
-        <h3 class="font-bold text-slate-900 text-base">5.2 Masajes terapéuticos</h3>
+        <h3 class="font-bold text-slate-900 text-base">Masajes terapéuticos</h3>
         <p class="text-xs text-slate-600">Técnicas manuales para descontracturar tejido, mejorar circulación y aliviar dolor crónico.</p>
       </div>
 
       <div id="geriatricos" class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-2">
         <div class="text-2xl">👵</div>
-        <h3 class="font-bold text-slate-900 text-base">5.3 Terapia grupal geriátrica</h3>
+        <h3 class="font-bold text-slate-900 text-base">Terapia grupal geriátrica</h3>
         <p class="text-xs text-slate-600">Actividades adaptadas para el adulto mayor orientadas a preservar equilibrio y coordinación.</p>
       </div>
     </div>
 
-    <!-- Módulo Masoterapia Integrado -->
+    
     <div class="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden mt-6">
       <div class="p-6 border-b border-slate-100 bg-slate-50/50">
         <h3 class="font-bold text-[#044343] text-sm">Fundamento de la Masoterapia en Fisioterapia</h3>

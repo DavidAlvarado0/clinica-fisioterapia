@@ -21,8 +21,8 @@ const form = reactive<AppointmentData>({
 
 const sentSuccess = ref(false)
 
-// Número configurado para la prueba
-const CLINIC_WHATSAPP = '50374986382'
+// Número oficial de la Clínica de Fisioterapia G&G
+const CLINIC_WHATSAPP = '50372086815'
 
 const handleSubmit = () => {
   if (!form.fullName || !form.phone) {
@@ -30,21 +30,17 @@ const handleSubmit = () => {
     return
   }
 
-  // Estructura del mensaje formal para WhatsApp
   const message = 
-    `*¡HOLA! DESEO AGENDAR UNA CITA EN FISIOCLINICS* 🩺\n\n` +
+    `*¡HOLA! DESEO AGENDAR UNA CITA EN CLÍNICA G&G* 🩺\n\n` +
     `👤 *Paciente:* ${form.fullName}\n` +
-    `📞 *Teléfono:* ${form.phone}\n` +
+    `📞 *Teléfono del paciente:* ${form.phone}\n` +
     `📋 *Especialidad/Servicio:* ${form.category}\n` +
     `📅 *Fecha sugerida:* ${form.preferredDate || 'A convenir'}\n` +
     `⏰ *Horario de preferencia:* ${form.preferredTime}\n` +
     (form.notes ? `📝 *Motivo o síntomas:* ${form.notes}\n\n` : '\n') +
-    `_Mensaje enviado desde el sitio web de Fisioclinics._`
+    `_Mensaje enviado desde el sitio web de la clínica._`
 
-  // Enlace universal de la API de WhatsApp
   const whatsappUrl = `https://wa.me/${CLINIC_WHATSAPP}?text=${encodeURIComponent(message)}`
-
-  // Abrir WhatsApp en pestaña nueva
   window.open(whatsappUrl, '_blank')
   sentSuccess.value = true
 }
@@ -54,13 +50,13 @@ const handleSubmit = () => {
   <div class="bg-white rounded-3xl border border-slate-100 shadow-xl overflow-hidden text-left max-w-4xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-5">
       
-      <!-- Información lateral -->
+      
       <div class="md:col-span-2 bg-[#044343] p-8 text-white flex flex-col justify-between space-y-6">
         <div>
           <span class="text-xs font-bold text-teal-300 uppercase tracking-wider">Atención Profesional</span>
           <h3 class="text-2xl font-black mt-2 leading-tight">Agendá tu Evaluación</h3>
           <p class="text-xs text-slate-200 mt-3 leading-relaxed">
-            Completá tus datos para coordinar tu cita y elaborar tu plan de rehabilitación personalizado.
+            Completá tus datos para coordinar tu cita clínica y elaborar tu plan de rehabilitación personalizado.
           </p>
         </div>
 
@@ -69,7 +65,7 @@ const handleSubmit = () => {
             <span class="text-teal-300 text-base">📍</span>
             <div>
               <p class="font-bold text-teal-200">Ubicación</p>
-              <p class="text-slate-300">San Miguel, El Salvador</p>
+              <p class="text-slate-300">4 Calle Poniente 611 bis, San Miguel 3301</p>
             </div>
           </div>
 
@@ -77,25 +73,26 @@ const handleSubmit = () => {
             <span class="text-teal-300 text-base">⏰</span>
             <div>
               <p class="font-bold text-teal-200">Horarios</p>
-              <p class="text-slate-300">Lunes a Sábado: 8:00 AM - 5:00 PM</p>
+              <p class="text-slate-300">Lun - Vie: 8:00 AM - 5:00 PM</p>
+              <p class="text-slate-300">Sábado: 8:00 AM - 12:00 PM</p>
             </div>
           </div>
 
           <div class="flex items-start gap-3">
             <span class="text-teal-300 text-base">💬</span>
             <div>
-              <p class="font-bold text-teal-200">WhatsApp Directo</p>
-              <p class="text-slate-300">+503 7498-6382</p>
+              <p class="font-bold text-teal-200">Contacto Directo</p>
+              <p class="text-slate-300">+503 7208-6815</p>
             </div>
           </div>
         </div>
 
         <div class="pt-4 border-t border-teal-800/60 text-[11px] text-teal-300/80">
-          Respuesta y confirmación inmediata en horarios de atención.
+          Respuesta y confirmación en horarios hábiles de la clínica.
         </div>
       </div>
 
-      <!-- Formulario de Entrada -->
+      
       <form @submit.prevent="handleSubmit" class="md:col-span-3 p-8 space-y-4">
         
         <div>
@@ -104,7 +101,7 @@ const handleSubmit = () => {
             v-model="form.fullName"
             type="text" 
             required 
-            placeholder="Ej: David Elías Alvarado" 
+            placeholder="Ingresa tu nombre completo" 
             class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-all"
           />
         </div>
@@ -116,7 +113,7 @@ const handleSubmit = () => {
               v-model="form.phone"
               type="tel" 
               required 
-              placeholder="Ej: 7498-6382" 
+              placeholder="Ej: 7000-0000" 
               class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent transition-all"
             />
           </div>
@@ -182,7 +179,7 @@ const handleSubmit = () => {
         </button>
 
         <p v-if="sentSuccess" class="text-xs text-center text-green-700 font-semibold pt-1">
-          ✓ Se abrió la ventana de WhatsApp hacia el número 7498-6382 con los datos listos para enviar.
+          ✓ Se abrió la ventana de WhatsApp hacia el número de la clínica (7208-6815) con los datos listos para enviar.
         </p>
       </form>
 
