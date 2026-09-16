@@ -8,36 +8,87 @@ const treatment = computed(() => treatmentsData[route.params.slug as string])
 </script>
 
 <template>
-  <div v-if="treatment" class="text-left">
-    <!-- Hero Banner Dinámico -->
-    <section class="relative bg-gradient-to-r from-teal-950 to-slate-900 text-white min-h-[340px] flex items-center overflow-hidden">
-      <div class="absolute inset-0 z-0 opacity-30 mix-blend-multiply">
-        <img :src="treatment.heroImage" :alt="treatment.title" class="w-full h-full object-cover">
+  <div v-if="treatment" class="text-left bg-slate-50 min-h-screen">
+    
+    <!-- BANNER ESTILO FISIOCLINICS -->
+    <section class="relative w-full bg-[#8fa4a2] overflow-hidden border-b border-slate-200">
+      <div class="max-w-7xl mx-auto min-h-[300px] md:min-h-[340px] flex flex-col md:flex-row items-center relative">
+        
+        <!-- Imagen Clínica Real (Limpia, sin capa oscura) -->
+        <div class="w-full md:w-7/12 h-64 md:h-[340px] relative overflow-hidden order-1 md:order-1">
+          <img 
+            :src="treatment.heroImage" 
+            :alt="treatment.title" 
+            class="w-full h-full object-cover object-center"
+          />
+          <!-- Desvanecido suave hacia el bloque de texto en pantallas grandes -->
+          <div class="hidden md:block absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#8fa4a2]"></div>
+        </div>
+
+        <!-- Bloque de Textos y Llamado a la Acción -->
+        <div class="w-full md:w-5/12 p-6 md:p-10 flex flex-col justify-center items-start md:items-end text-left md:text-right space-y-3 z-10 order-2 md:order-2">
+          
+          <!-- Logo secundario institucional -->
+          <div class="flex items-center gap-1.5 opacity-90 mb-1">
+            <span class="text-lg font-black tracking-tight text-[#044343]">fisioclinics</span>
+            <span class="text-[10px] uppercase font-bold bg-[#044343] text-teal-200 px-1.5 py-0.5 rounded">SM</span>
+          </div>
+
+          <p class="text-xs uppercase tracking-widest font-black text-[#044343]">
+            Especialistas en Fisioterapia
+          </p>
+
+          <!-- Título cursivo/destacado -->
+          <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold italic text-white drop-shadow-sm leading-tight">
+            {{ treatment.title }}
+          </h1>
+
+          <!-- Resumen de alcance -->
+          <p class="text-xs sm:text-sm text-slate-800 font-medium">
+            Valoración clínica | Rehabilitación funcional | Prevención
+          </p>
+
+          <div v-if="treatment.importance" class="inline-block bg-white/70 text-[#044343] px-3 py-1 rounded-full text-[11px] font-bold shadow-sm">
+            Abordaje Fisioterapéutico: {{ treatment.importance }}
+          </div>
+
+          <!-- Botón de consulta directa estilo FisioClinics -->
+          <div class="pt-2">
+            <a 
+              href="https://wa.me/50374986382" 
+              target="_blank" 
+              class="inline-block bg-[#044343] hover:bg-[#032e2e] text-teal-100 hover:text-white text-xs font-bold uppercase tracking-wider px-5 py-2.5 rounded shadow hover:shadow-md transition-all"
+            >
+              Llámanos o escríbenos para más info
+            </a>
+          </div>
+        </div>
+
       </div>
-      <div class="relative z-10 max-w-6xl mx-auto px-4 py-16 w-full">
-        <div class="flex items-center gap-2 text-xs font-semibold text-teal-300 uppercase tracking-wider mb-2">
-          <router-link :to="'/' + treatment.categorySlug" class="hover:underline">{{ treatment.category }}</router-link>
-          <span>/</span>
-          <span>Especialidad Clínica</span>
-        </div>
-        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight mt-1">{{ treatment.title }}</h1>
-        <div v-if="treatment.importance" class="mt-4 inline-block bg-teal-500/20 text-teal-300 border border-teal-500/40 px-3 py-1 rounded-full text-xs font-bold">
-          Importancia Fisioterapéutica: {{ treatment.importance }}
-        </div>
+
+      <!-- Barra separadora con el lema -->
+      <div class="bg-[#044343] text-white text-center py-2 px-4 text-xs md:text-sm font-semibold tracking-wide">
+        Fisioclinics San Miguel es RECUPERACIÓN Y SALUD INTEGRAL
       </div>
     </section>
 
-    <!-- Cuerpo del Contenido -->
+    <!-- CUERPO CLÍNICO MODULAR -->
     <div class="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-3 gap-10">
       
       <!-- Columna Principal -->
       <div class="lg:col-span-2 space-y-8">
-        <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-          <h2 class="text-xl font-bold text-[#044343]">Definición y Enfoque Clínico</h2>
+        
+        <!-- Definición -->
+        <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+          <div class="border-b border-slate-100 pb-3">
+            <span class="text-xs font-bold text-teal-700 uppercase tracking-wider">{{ treatment.category }}</span>
+            <h2 class="text-2xl font-bold text-[#044343] mt-0.5">Definición y Enfoque Fisioterapéutico</h2>
+          </div>
           <p class="text-slate-600 text-sm leading-relaxed">{{ treatment.definition }}</p>
         </div>
 
-        <div v-if="treatment.objectives || treatment.details" class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+        <!-- Aspectos Clave u Objetivos -->
+        <div v-if="treatment.objectives || treatment.details" class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
           <h2 class="text-xl font-bold text-[#044343]">Aspectos Clave del Tratamiento</h2>
           <p v-if="treatment.objectives" class="text-slate-600 text-sm leading-relaxed">{{ treatment.objectives }}</p>
           <ul v-if="treatment.details" class="space-y-2 text-sm text-slate-600">
@@ -48,32 +99,46 @@ const treatment = computed(() => treatmentsData[route.params.slug as string])
           </ul>
         </div>
 
-        <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm space-y-4">
-          <h2 class="text-xl font-bold text-[#044343]">Beneficios de la Fisioterapia</h2>
+        <!-- Beneficios -->
+        <div class="bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+          <h2 class="text-xl font-bold text-[#044343]">Beneficios Clínicos</h2>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div v-for="b in treatment.benefits" :key="b" class="p-3.5 bg-slate-50 border border-slate-100 rounded-xl text-xs text-slate-700 font-medium flex items-center gap-2">
-              <span class="text-teal-500 text-base">✦</span>
+            <div v-for="b in treatment.benefits" :key="b" class="p-3.5 bg-slate-50 border border-slate-200/70 rounded-xl text-xs text-slate-700 font-medium flex items-center gap-2">
+              <span class="text-teal-600 text-base">✦</span>
               <span>{{ b }}</span>
             </div>
           </div>
         </div>
+
       </div>
 
-      <!-- Tarjeta Lateral de Citas -->
+      <!-- Barra Lateral de Reserva -->
       <div>
-        <div class="bg-[#044343] text-white p-6 rounded-2xl shadow-md text-left space-y-4 sticky top-24">
-          <h3 class="text-lg font-bold text-teal-200">¿Requieres este tratamiento?</h3>
-          <p class="text-xs text-slate-200 leading-relaxed">
-            Agenda una evaluación profesional para estructurar un plan de recuperación individualizado.
+        <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm text-left space-y-4 sticky top-24">
+          <span class="text-xs font-bold text-teal-700 uppercase tracking-wider">Citas y Valoración</span>
+          <h3 class="text-lg font-bold text-slate-900 leading-snug">¿Deseas iniciar este tratamiento?</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            Coordinamos tu evaluación inicial con fisioterapeutas certificados para estructurar tu plan de rehabilitación.
           </p>
           
-          <router-link to="/#contacto" class="block w-full text-center bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold py-3 rounded-xl transition-all text-sm shadow-md">
+          <router-link 
+            to="/#contacto" 
+            class="block w-full text-center bg-[#044343] hover:bg-teal-800 text-white font-bold py-3 rounded-xl transition-all text-xs uppercase tracking-wide shadow-sm"
+          >
             Agendar Consulta
           </router-link>
 
-          <div class="border-t border-teal-800/60 pt-4 space-y-2 text-xs text-teal-200">
-            <p>📞 Tel: <a href="tel:+503617311285" class="hover:underline text-white font-semibold">6173-1125</a></p>
-            <p>💬 WhatsApp: <a href="https://wa.me/503617311285" target="_blank" class="hover:underline text-white font-semibold">6173-1125</a></p>
+          <a 
+            href="https://wa.me/50374986382" 
+            target="_blank"
+            class="block w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-2.5 rounded-xl transition-all text-xs shadow-sm flex items-center justify-center gap-1.5"
+          >
+            <span>💬</span> WhatsApp Directo (7498-6382)
+          </a>
+
+          <div class="border-t border-slate-100 pt-3 space-y-1 text-xs text-slate-500">
+            <p>📍 San Miguel, El Salvador</p>
+            <p>⏰ Lun - Sáb: 8:00 AM - 5:00 PM</p>
           </div>
         </div>
       </div>
@@ -81,6 +146,7 @@ const treatment = computed(() => treatmentsData[route.params.slug as string])
     </div>
   </div>
 
+  <!-- Fallback no encontrado -->
   <div v-else class="max-w-4xl mx-auto py-20 px-4 text-center space-y-4">
     <h2 class="text-2xl font-bold text-slate-800">Tratamiento no encontrado</h2>
     <p class="text-slate-500 text-sm">El contenido solicitado no está registrado.</p>
